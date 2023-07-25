@@ -7,6 +7,7 @@ const generatePackageJson = (name) => `{
       "start": "node index.js --port=3000",
       "prepare": "npx husky install",
       "test": "npx jest",
+      "coverage": "jest --coverage",
       "lint:fix": "npx eslint *.js --fix",
       "format": "npx prettier ./**/*{.js,.json} --write",
       "pre-commit": "npx lint-staged"
@@ -25,6 +26,7 @@ const generatePackageJson = (name) => `{
       "express": "^4.17.3"
      },
     "devDependencies":{
+      "@babel/preset-env": "^7.22.9",
       "@types/node":"16.9.6",
       "@types/eslint":"7.28.1",
       "@types/jest":"27.4.0",

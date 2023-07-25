@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
-const { writeFileSync } = require('fs')
+const { writeFileSync, mkdirSync } = require('fs')
 const {
   generateIndex,
   generateGitIgnore,
@@ -9,6 +9,8 @@ const {
   generateFunctionPrettierRc,
   generateFunctionCommitlintRc,
   generatePackageJson,
+  generateFunctionBabelConfig,
+  generateFunctionIndexTest,
 } = require('../../../templates/createTemplates/function-templates')
 
 // eslint-disable-next-line no-unused-vars
@@ -43,6 +45,8 @@ class handleFunction {
         const eslintrcString = generateFunctionEsLintRc()
         const prettierrcString = generateFunctionPrettierRc()
         const commitlintRcString = generateFunctionCommitlintRc()
+        const babelConfigString = generateFunctionBabelConfig()
+        const indexTestString = generateFunctionIndexTest()
 
         writeFileSync(`${core.blockFolderPath}/index.js`, indexString)
         writeFileSync(`${core.blockFolderPath}/package.json`, packageJsonString)
@@ -51,6 +55,9 @@ class handleFunction {
         writeFileSync(`${core.blockFolderPath}/.eslintrc.json`, eslintrcString)
         writeFileSync(`${core.blockFolderPath}/.prettierrc.json`, prettierrcString)
         writeFileSync(`${core.blockFolderPath}/.commitlintrc.json`, commitlintRcString)
+        writeFileSync(`${core.blockFolderPath}/babel.config.json`, babelConfigString)
+        mkdirSync(`${core.blockFolderPath}/tests`)
+        writeFileSync(`${core.blockFolderPath}/tests/index.test.js`, indexTestString)
       }
     )
   }
